@@ -1,0 +1,70 @@
+####   Creating Google Cloud projects with Terraform #####  
+Test Create Project following below steps
+
+/*************************************************************
+Use this as an example
+Project name
+My Project 50982
+Project number
+624598818558
+Project ID
+sixth-backbone-341422
+*************************************************************/
+
+
+# Prerequisites
+To run the commands described in this document, you need to have the following installed:
+
+The Google Cloud SDK version 319.0.0 or later
+Terraform version 0.13.7.
+An existing project which the user has access to be used by terraform-validator.
+Note: Make sure that you use the same version of Terraform throughout this series. Otherwise, you might experience Terraform state snapshot lock errors.
+
+# Set up the environment
+Also make sure that you've done the following:
+
+Set up a Google Cloud organization.
+Set up a Google Cloud billing account.
+Created Cloud Identity or Google Workspace groups for organization and billing admins.
+
+Added the user who will use Terraform to the group_org_admins group. They must be in this group, or they won't have roles/resourcemanager.projectCreator access.
+
+For the user who will run the procedures in this document, granted the following roles:
+The roles/resourcemanager.organizationAdmin role on the Google Cloud organization.
+The roles/billing.admin role on the billing account.
+The roles/resourcemanager.folderCreator role.
+
+## Create the Terraform service account for The Project
+Grant the service account permission to view the Admin Project and manage Cloud Storage
+Grant roles/billing.admin role on the billing account.
+Grant roles/resourcemanager.folderCreator role.
+
+Terraform requires the following API's be enabled run, 
+
+gcloud services enable cloudresourcemanager.googleapis.com
+gcloud services enable cloudbilling.googleapis.com
+gcloud services enable iam.googleapis.com
+gcloud services enable compute.googleapis.com
+gcloud services enable serviceusage.googleapis.com
+
+## Service Account Authenticating the SDK to Google Cloud:
+gcloud auth activate-service-account terraform-50982-host@sixth-backbone-341422.iam.gserviceaccount.com --key-file=C:\Users\Ayman Mousa\AppData\Roaming\terraform.d\sixth-backbone-341422-1122fa33e663.json
+
+output should look like:
+Activated service account credentials for: [terraform-50982-host@sixth-backbone-341422.iam.gserviceaccount.com]
+
+Verify service account and make sure the ACTIVE account is set to the SA account with *run,
+gcloud auth list
+Credentialed Accounts
+
+ACTIVE:
+ACCOUNT: ayman.mousa@onixdev2.com
+
+ACTIVE: *
+ACCOUNT: terraform-50982-host@sixth-backbone-341422.iam.gserviceaccount.com
+
+To set the active account, run:
+    $ gcloud config set account `ACCOUNT`
+gcloud projects create ayman1234test --organization=508698796108
+
+
