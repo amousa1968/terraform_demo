@@ -1,0 +1,32 @@
+---
+#  - name: Creating user "{{ item }}"
+#    user:
+#      name: "{{ item }}"
+#      password: "{{ password }}"
+#      groups: remote
+#      state: present
+#      append: yes
+#      createhome: yes
+#      comment: "{{ comment }}"
+#    with_items: "{{ users }}"
+#    when: ansible_distribution == "centos" or "sles"
+
+  - name: creating user "{{ item }}"
+    user:
+      name: "{{ item }}"
+      password: "{{ password }}"
+      groups: wheel,remote
+      state: present
+      append: yes
+      comment: "{{ comment }}"
+    with_items: "{{ users }}"
+#    when: ansible_distribution == "redhat"
+
+#  - name: Expiring password for user
+#    shell: chage -d 0 "{{  item }}"
+#    with_items: "{{ users }}"
+
+#  - name: Expiring password for user
+#   shell: chage -m 0 -M 90 -I -1 -E -1 "{{ item }}"
+#   with_items: "{{ users }}"
+
